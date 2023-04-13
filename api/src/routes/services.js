@@ -4,16 +4,29 @@ const axios = require("axios");
 const test = (req, res) => {
   res.send("hola");
 };
-const logIn = async (req, res) => {
+const getUsers = async (req, res) => {
   try {
-    const { email, pw } = req.body;
+    const allUsers = await User.findAll();
 
-    if (!email || !pw) {
+    const resp =
+      allUsers.length === 0 ? "No hay usuarios registrados!" : allUsers;
+
+    res.status(200).send(resp);
+  } catch (error) {
+    console.log("ERROR:  ", error);
+    res.status(400).send(error);
+  }
+};
+const createUser = async (req, res) => {
+  try {
+    const { name, email, pw } = req.body;
+
+    if (!email || !pw || !name) {
       return res.status(400).send("Data mistakes!");
     }
 
     const newUser = await User.create({
-      name: email,
+      name: name,
       email: email,
       pw: pw,
     });
@@ -24,7 +37,9 @@ const logIn = async (req, res) => {
     res.status(400).send(error);
   }
 };
+
 module.exports = {
   test,
-  logIn,
+  getUsers,
+  createUser,
 };

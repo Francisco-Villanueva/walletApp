@@ -1,0 +1,33 @@
+.form-container {
+  background-color: #cecece;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  width: 90vw;
+}
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-container form input {
+  border: none;
+  border-radius: 0.3em;
+  padding: 0.5em 1.3em;
+  font-size: 1rem;
+}
+
+.form-container button {
+  border: none;
+  width: 50%;
+  padding: 1em 0;
+  border-radius: 1em;
+  margin: auto;
+}
+.pwNoCumple {
+  border: 1px solid red;
+}
+.pwCumple {
+  border: 1px solid green;
+}

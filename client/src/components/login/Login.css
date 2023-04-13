@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 50vw;
+  width: 70vw;
   height: 50vh;
   gap: 2rem;
   font-family: "Montserrat", sans-serif;
@@ -23,15 +23,18 @@
 }
 .login-bottom {
   display: flex;
-  width: 80%;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-around;
+  gap: 1rem;
+  padding: 1em;
+  /* border: 1px solid #000; */
+  text-align: center;
 }
 .login-input {
   display: flex;
   gap: 1rem;
   flex-direction: column;
-  width: 80%;
 }
 .login-input input {
   outline: none;
@@ -40,11 +43,25 @@
 }
 .login-bottom button {
   font-weight: 800;
-  height: 50%;
   background-color: #24294a;
   color: #fff;
-  padding: 0.3em 1em;
-  border-radius: 1em;
+  padding: 0.5em 1.2em;
+  border-radius: 0.3em;
+  transition: all 0.3s;
+  width: 50%;
+  margin: auto;
+}
+.login-bottom button:hover {
+  box-shadow: 1px 1px 10px #000;
+}
+.register-option b {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.pwIncorrect {
+  color: red;
+  border-color: red;
+  transition: all 1s;
 }
 
 /*------------------------------- CLASES PARA EFECTOS */
