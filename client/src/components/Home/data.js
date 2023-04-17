@@ -2,14 +2,14 @@ export const GASTOS = [
   {
     name: "Transferencia enviada",
     type: "Otros",
-    spent: 500,
+    spent: 15000,
     date: "1-april",
     place: "Santiago",
   },
   {
     name: "Pago con QR",
     type: "Supermercado",
-    spent: 5000.45,
+    spent: 350,
     date: "1-april",
     place: "General Store",
   },
@@ -37,7 +37,7 @@ export const GASTOS = [
   {
     name: "Pago",
     type: "Hogar",
-    spent: 21237,
+    spent: 2,
     date: "1-april",
     place: "GILI Y CIA SRL",
   },
@@ -79,7 +79,7 @@ export const GASTOS = [
   {
     name: "Pago con QR",
     type: "Pescadería",
-    spent: 1350,
+    spent: 35000,
     date: "1-april",
     place: "San Benito ",
   },

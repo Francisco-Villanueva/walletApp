@@ -12,7 +12,7 @@ export default function GastoCard({ name, mount, color, date, type }) {
         </b>
         <b>{name}</b>
       </div>
-      <b>$ {mount.toLocaleString("de-DE")}</b>
+      <b>$ {mount}</b>
     </div>
   );
 }

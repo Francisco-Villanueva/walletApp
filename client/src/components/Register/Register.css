@@ -31,3 +31,17 @@
 .pwCumple {
   border: 1px solid green;
 }
+.pwMsj {
+  color: red;
+  font-size: 0.8rem;
+  text-align: start;
+  margin: 0;
+}
+.register-btn {
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.register-btn:hover {
+  background-color: #24294acb;
+}

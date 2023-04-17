@@ -25,7 +25,8 @@ export default function Home() {
   }
 
   let gastosPorType = TYPES.filter((t) => t.mount > 0);
-  const total = gastosPorType.reduce((acc, t) => acc + t.mount, 0);
+
+  var total = gastosPorType.reduce((a, b) => a + b.mount, 0);
   let colorOrder = TYPES.sort((a, b) => b.mount - a.mount);
   const DATA = {
     labels: ["Pear", "Papa", "manzana", "remolacha"],
@@ -38,12 +39,12 @@ export default function Home() {
     ],
   };
 
-  console.log("gastos hechos: ", gastosPorType);
+  console.log("gastos hechos: ", gastosPorType, "suma: ", total);
   return (
     <div className="home-main focus-in-expand">
       <section className="top">
         <h1>Abril</h1>
-        <h3>$ {total.toLocaleString()}</h3>
+        <h3>$ {total}</h3>
       </section>
       <section className="mid">
         <div className="numbersInputs">

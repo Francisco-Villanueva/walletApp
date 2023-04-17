@@ -1,24 +1,42 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import walletimg from "../../img/wallet.png";
 import "./Register.css";
 import { useNavigate } from "react-router-dom";
+import { createUser } from "../../redux/actions";
 export default function Register() {
+  const dispatch = useDispatch();
   const [exit, setExit] = useState(false);
+  const [pwMsj, setPwMsj] = useState(
+    "La contraseña debe contener al menos una letra mayúscula y un número."
+  );
   const [data, setData] = useState({
     userName: "",
     userEmail: "",
     userPw: "",
   });
+
   const navigate = useNavigate();
-  const handleExit = () => {};
+
   const handleRegisterClick = () => {
     setExit(exit === true ? false : true);
     setTimeout(() => navigate("/"), 500);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmitUser = (e) => {
     e.preventDefault();
-    console.log(data);
+    const newUser = {
+      name: data.userName,
+      email: data.userEmail,
+      pw: data.userPw,
+    };
+    console.log("New User : ", newUser);
+    if (newUser.name !== "" && newUser.email !== "" && newUser.pw !== "") {
+      dispatch(createUser(newUser));
+    }
+
+    setExit(exit === true ? false : true);
+    setTimeout(() => navigate("/"), 500);
   };
 
   function verificarPassword(password) {
@@ -26,11 +44,13 @@ export default function Register() {
     var regex = /^(?=.*[A-Z])(?=.*\d)/;
 
     // comprobar si la contraseña cumple con la expresión regular
+    let msj = "";
     if (regex.test(password)) {
-      console.log("La contraseña es válida.");
+      msj = "La contraseña es válida.";
+      setPwMsj(msj);
       return true;
     } else {
-      console.log(
+      setPwMsj(
         "La contraseña debe contener al menos una letra mayúscula y un número."
       );
       return false;
@@ -43,8 +63,6 @@ export default function Register() {
   const handleInputChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
     if ([e.target.name] == "userPw") {
-      // verificarPassword(e.target.value);
-
       if (verificarPassword(e.target.value)) {
         setClassPw(true);
       } else {
@@ -52,7 +70,7 @@ export default function Register() {
       }
     }
 
-    if ([e.target.name == "userPw2"]) {
+    if ([e.target.name === "userPw2"]) {
       if (e.target.value == data.userPw && e.target.value != "") {
         setPwCoinciden(true);
       } else {
@@ -60,6 +78,10 @@ export default function Register() {
       }
     }
   };
+
+  const handleDisable =
+    data.userEmail && data.userName && calsePw ? false : true;
+
   return (
     <div
       className={`login-main-container ${exit ? "slide-out-fwd-center" : ""}`}
@@ -79,7 +101,7 @@ export default function Register() {
             onChange={handleInputChange}
           />
           <input
-            name="userName"
+            name="userEmail"
             type="email"
             placeholder="Email"
             onChange={handleInputChange}
@@ -91,6 +113,13 @@ export default function Register() {
             className={calsePw ? "pwCumple" : "pwNoCumple"}
             onChange={handleInputChange}
           />
+          <span
+            className="pwMsj"
+            style={calsePw ? { display: "none" } : { visibility: "visible" }}
+          >
+            {" "}
+            {pwMsj}
+          </span>
           <input
             name="userPw2"
             type="password"
@@ -98,11 +127,14 @@ export default function Register() {
             placeholder="Confirm Password"
             onChange={handleInputChange}
           />
-          {/* <span className={validPw ? "pwIncorrect" : "pwCorrect"}>
-            Incorrect password
-          </span> */}
         </div>
-        <button onClick={handleExit}>Sign In</button>
+        <button
+          className="register-btn"
+          disabled={handleDisable}
+          onClick={handleSubmitUser}
+        >
+          Sign In
+        </button>
         <span className="register-option">
           ¿Ya tienes cuenta? <b onClick={handleRegisterClick}>Log In</b>
         </span>

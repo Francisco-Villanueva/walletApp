@@ -43,7 +43,7 @@
 }
 .login-bottom button {
   font-weight: 800;
-  background-color: #24294a;
+  background-color: #24294acb;
   color: #fff;
   padding: 0.5em 1.2em;
   border-radius: 0.3em;
@@ -52,7 +52,8 @@
   margin: auto;
 }
 .login-bottom button:hover {
-  box-shadow: 1px 1px 10px #000;
+  background-color: #24294a;
+  box-shadow: 1px 1px 5px #000;
 }
 .register-option b {
   cursor: pointer;

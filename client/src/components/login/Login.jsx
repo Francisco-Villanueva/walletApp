@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import walletimg from "../../img/wallet.png";
 import { useNavigate } from "react-router-dom";
 import { USERS } from "./data";
 import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../../redux/actions";
 export default function Login() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+  const allUsers = useSelector((s) => s.users);
+  console.log("allUsers", allUsers);
   const [exit, setExit] = useState(false);
   const [user, setUser] = useState({
     userName: "",
@@ -12,12 +20,13 @@ export default function Login() {
   });
   const [validPw, setValidPw] = useState(false);
   const navigate = useNavigate();
-
-  const checkUser = (allUsers, userToCheck) => {
-    const aux = allUsers.filter((e) => e.userName === userToCheck.userName);
-
+  const checkUser = (usuarios, userToCheck) => {
+    const aux = usuarios.filter(
+      (e) => e.name === userToCheck.userName || e.email === userToCheck.userName
+    );
+    console.log("aux", aux[0]);
     if (aux.length != 0) {
-      if (aux[0].userPw === userToCheck.userPw) {
+      if (aux[0].pw === userToCheck.userPw) {
         setExit(exit === true ? false : true);
         setTimeout(() => navigate("/home"), 1000);
       } else {
@@ -34,7 +43,7 @@ export default function Login() {
   };
 
   const handleExit = () => {
-    checkUser(USERS, user);
+    checkUser(allUsers, user);
   };
 
   const handleInputChange = (e) => {
@@ -74,7 +83,9 @@ export default function Login() {
             Incorrect password
           </span> */}
         </div>
-        <button onClick={handleExit}>Log In</button>
+        <button onClick={handleExit} className="register-btn">
+          Log In
+        </button>
         <span className="register-option">
           ¿No tienes cuenta? <b onClick={handleRegisterClick}>Sign In</b>
         </span>

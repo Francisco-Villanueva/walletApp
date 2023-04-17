@@ -8,10 +8,7 @@ const getUsers = async (req, res) => {
   try {
     const allUsers = await User.findAll();
 
-    const resp =
-      allUsers.length === 0 ? "No hay usuarios registrados!" : allUsers;
-
-    res.status(200).send(resp);
+    res.status(200).send(allUsers);
   } catch (error) {
     console.log("ERROR:  ", error);
     res.status(400).send(error);
