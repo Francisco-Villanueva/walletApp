@@ -1,32 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GASTOS, TYPES, TORTA } from "./data";
 import "./Home.css";
 import { Pie } from "react-chartjs-2";
 import { Chart, ArcElement } from "chart.js";
-import Gastos from "./Gastos";
+import Gastos from "./Gastos/Gastos";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllSpents } from "../../redux/actions";
+import NewSpent from "./Gastos/NewSpent/NewSpent";
 Chart.register(ArcElement);
-export default function Home() {
-  const [num, setNum] = useState({
-    num1: 1,
-    num3: 1,
-    num2: 1,
-  });
+export default function Home({ spents }) {
+  const allSpents = useSelector((s) => s.spents);
 
-  const handleInputChange = (e) => {
-    setNum({ ...num, [e.target.name]: e.target.value });
-  };
+  console.log("all spents: ", allSpents);
 
-  for (var i = 0; i < TYPES.length; i++) {
-    for (var j = 0; j < GASTOS.length; j++) {
-      if (GASTOS[j].type === TYPES[i].name) {
-        TYPES[i].mount += GASTOS[j].spent;
+  const setSpentsByTypes = () => {
+    for (var i = 0; i < TYPES.length; i++) {
+      for (var j = 0; j < allSpents.length; j++) {
+        if (allSpents[j].type === TYPES[i].name) {
+          TYPES[i].mount += allSpents[j].amount;
+        }
       }
     }
-  }
+  };
+
+  useEffect(() => {
+    setSpentsByTypes();
+  }, [allSpents]);
+
+  console.log("Tyess: ", TYPES);
 
   let gastosPorType = TYPES.filter((t) => t.mount > 0);
 
-  var total = gastosPorType.reduce((a, b) => a + b.mount, 0);
+  var total = allSpents.reduce((a, b) => a + b.amount, 0);
+
   let colorOrder = TYPES.sort((a, b) => b.mount - a.mount);
   const DATA = {
     labels: ["Pear", "Papa", "manzana", "remolacha"],
@@ -39,18 +45,17 @@ export default function Home() {
     ],
   };
 
-  console.log("gastos hechos: ", gastosPorType, "suma: ", total);
+  console.log("gastos hechos: ", gastosPorType, "\nsuma: ", total);
+
   return (
     <div className="home-main focus-in-expand">
       <section className="top">
         <h1>Abril</h1>
-        <h3>$ {total}</h3>
+        <h3>$ {total.toLocaleString("de-DE")}</h3>
       </section>
       <section className="mid">
         <div className="numbersInputs">
-          <input name="num1" type="number" onChange={handleInputChange} />
-          <input name="num2" type="number" onChange={handleInputChange} />
-          <input name="num3" type="number" onChange={handleInputChange} />
+          <NewSpent />
         </div>
         <div className="grafico-cont">
           <Pie data={DATA} options={true} redraw={false} />
@@ -59,7 +64,6 @@ export default function Home() {
           <Gastos gastos={gastosPorType} />
         </div>
       </section>
-      <section className="bottom">BOTTOM</section>
     </div>
   );
 }

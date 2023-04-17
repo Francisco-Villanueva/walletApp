@@ -1,6 +1,6 @@
 import React from "react";
 import "./Gastos.css";
-import GastoCard from "./GastoCard";
+import GastoCard from "./Cards/GastoCard";
 export default function Gastos({ gastos }) {
   console.log("GASTOS: ", gastos);
   gastos.sort((a, b) => b.mount - a.mount);

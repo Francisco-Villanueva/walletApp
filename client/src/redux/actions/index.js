@@ -27,7 +27,7 @@ export const createUser = (user) => {
 export const getAllSpents = () => {
   return async function (dispatch) {
     const res = await axios.get("http://localhost:4000/spent");
-    console.log("entroe el getAllSpents() ", res.data);
+    console.log("entro al getAllSpents() ", res.data);
     dispatch({
       type: actionTypes.GET_SPENTS,
       payload: res.data,
