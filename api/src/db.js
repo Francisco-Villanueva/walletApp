@@ -32,7 +32,7 @@ let capsEntries = entries.map((entry) => [
   entry[1],
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
-const { Wallet, User } = sequelize.models;
+const { Wallet, User, Spent } = sequelize.models;
 module.exports = {
   ...sequelize.models,
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');

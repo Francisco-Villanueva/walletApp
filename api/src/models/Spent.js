@@ -18,5 +18,12 @@ module.exports = (sequelize) => {
     amount: {
       type: DataTypes.INTEGER,
     },
+    date: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    place: {
+      type: DataTypes.STRING,
+    },
   });
 };
