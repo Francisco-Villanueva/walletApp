@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { GASTOS, TYPES, TORTA } from "./data";
 import "./Home.css";
-import { Pie } from "react-chartjs-2";
-import { Chart, ArcElement } from "chart.js";
+import { Pie, Doughnut } from "react-chartjs-2";
 import Gastos from "./Gastos/Gastos";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllSpents } from "../../redux/actions";
 import NewSpent from "./Gastos/NewSpent/NewSpent";
+import { Chart, ArcElement } from "chart.js";
 Chart.register(ArcElement);
+
 export default function Home({ typesSpents }) {
   const allSpents = useSelector((s) => s.spents);
 
@@ -15,12 +16,15 @@ export default function Home({ typesSpents }) {
 
   let colorOrder = typesSpents.sort((a, b) => b.mount - a.mount);
   const DATA = {
-    labels: ["Pear", "Papa", "manzana", "remolacha"],
+    labels: colorOrder.map((t) => t.name),
     datasets: [
       {
+        label: "Gastos por tipo",
         data: typesSpents.map((t) => t.mount),
         backgroundColor: colorOrder.map((t) => t.color),
         hoverBackgroundColor: ["#cecece"],
+        color: "white",
+        borderWidht: 0,
       },
     ],
   };
@@ -38,7 +42,8 @@ export default function Home({ typesSpents }) {
           <NewSpent />
         </div>
         <div className="grafico-cont">
-          <Pie data={DATA} options={true} redraw={false} />
+          {/* <Pie data={DATA} options={true} redraw={false} /> */}
+          <Doughnut data={DATA} options={false} redraw={false} />
         </div>
         <div className="labels-container">
           <Gastos gastos={typesSpents} />

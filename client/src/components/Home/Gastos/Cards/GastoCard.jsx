@@ -15,9 +15,9 @@ export default function GastoCard({ name, mount, color, date, type }) {
           {" "}
           <FontAwesomeIcon icon={faWallet} />{" "}
         </b>
-        <b>{name}</b>
+        <b className="typeName"> {name}</b>
       </div>
-      <b>$ {mount.toLocaleString()}</b>
+      <b>$ {mount.toLocaleString("de-DE")}</b>
     </div>
   );
 }

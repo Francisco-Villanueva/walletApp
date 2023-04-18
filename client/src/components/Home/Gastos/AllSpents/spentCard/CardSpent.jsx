@@ -1,7 +1,11 @@
 import React from "react";
 import "./CardSpent.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartPie } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChartPie,
+  faArrowLeftLongToLine,
+} from "@fortawesome/free-solid-svg-icons";
+
 export default function CardSpent({ spent }) {
   const handleDate = (date) => {
     const fecha = new Date(date);
@@ -26,6 +30,7 @@ export default function CardSpent({ spent }) {
   };
 
   console.log(spent.date);
+
   return (
     <div className="cardSpent-contianer">
       <div className="receptor">
@@ -37,7 +42,7 @@ export default function CardSpent({ spent }) {
       </div>
       <div className="cardSpent-contianer__body">
         <div className="cardSpent-contianer__body__mount">
-          <h4>$ {spent.amount.toLocaleString()}</h4>
+          <h4>$ {spent.amount.toLocaleString("de-DE")}</h4>
           <span>{handleDate(spent.date)}</span>
         </div>
       </div>
