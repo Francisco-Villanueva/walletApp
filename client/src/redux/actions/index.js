@@ -1,7 +1,9 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 export const actionTypes = {
   GET_USERS: "GET_USERS",
   GET_SPENTS: "GET_SPENTS",
+  GET_SPENTS_BY_TYPES: "GET_SPENTS_BY_TYPES",
   DELETE_SPENTS: "DELETE_SPENTS",
 };
 export const getUser = () => {
@@ -50,10 +52,27 @@ export const getSpentById = (id) => {
 
 export const createSpent = (spent) => {
   return async function () {
-    const res = await axios.post("http://localhost:4000/spent", spent);
-    console.log("entroe el createSpent() ", res.data);
+    try {
+      const res = await axios.post("http://localhost:4000/spent", spent);
+      console.log("entroe el createSpent() ", res.data);
 
-    return res;
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Spent created successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return res;
+    } catch (error) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Error creating spent",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
 };
 
@@ -66,6 +85,22 @@ export const deleteSpent = (id) => {
         type: actionTypes.DELETE_SPENTS,
         payload: id,
       };
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+};
+
+export const getSpentsByTypes = (type) => {
+  return async function (dispatch) {
+    try {
+      const res = await axios.get(`http://localhost:4000/types`);
+      console.log("entroe el getSpentsByTypes() ", res.data);
+
+      return dispatch({
+        type: actionTypes.GET_SPENTS_BY_TYPES,
+        payload: res.data,
+      });
     } catch (error) {
       throw new Error(error);
     }

@@ -1,5 +1,5 @@
 const { Spent } = require("../db");
-
+const { TYPES } = require("../data");
 const getSpents = async (req, res) => {
   try {
     const allSpents = await Spent.findAll();
@@ -10,6 +10,7 @@ const getSpents = async (req, res) => {
     res.status(400).send(error);
   }
 };
+
 const createSpent = async (req, res) => {
   try {
     const { name, type, amount, place } = req.body;
@@ -68,9 +69,39 @@ const getSpentsById = async (req, res) => {
     res.status(400).send(error);
   }
 };
+const setMountByType = async (tipos) => {
+  try {
+    const allSpents = await Spent.findAll();
+    // console.log("ALL SPENTS: ", allSpents[0]["dataValues"].amount);
+    tipos.forEach((element) => {
+      element.mount = 0;
+    });
+    for (var i = 0; i < tipos.length; i++) {
+      for (var j = 0; j < allSpents.length; j++) {
+        if (allSpents[j]["dataValues"].type === tipos[i].name) {
+          tipos[i].mount += allSpents[j]["dataValues"].amount;
+        }
+      }
+    }
+
+    return tipos;
+  } catch (error) {
+    console.log("ERROR:  ", error);
+  }
+};
+
+const getSpentsByTypes = async (req, res) => {
+  try {
+    const resp = await setMountByType(TYPES);
+    res.status(200).json(resp);
+  } catch (error) {
+    console.log("ERROR:  ", error);
+  }
+};
 module.exports = {
   createSpent,
   getSpents,
   deleteSpent,
   getSpentsById,
+  getSpentsByTypes,
 };

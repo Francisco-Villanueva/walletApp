@@ -3,6 +3,7 @@ import { actionTypes } from "../actions";
 const intialState = {
   users: [],
   spents: [],
+  spentsByTypes: [],
 };
 
 const rootReducer = (state = intialState, action) => {
@@ -24,6 +25,13 @@ const rootReducer = (state = intialState, action) => {
       return {
         ...state,
         spents: state.spents.filter((spent) => spent.id !== action.payload),
+      };
+    }
+
+    case actionTypes.GET_SPENTS_BY_TYPES: {
+      return {
+        ...state,
+        spentsByTypes: action.payload,
       };
     }
     default:

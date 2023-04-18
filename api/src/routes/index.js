@@ -12,11 +12,13 @@ const {
   getSpents,
   deleteSpent,
   getSpentsById,
+  getSpentsByTypes,
 } = require("./spentServices");
 
 router.post("/spent", createSpent);
 router.get("/spent", getSpents);
 router.get("/spent/:id", getSpentsById);
 router.delete("/spent/:id", deleteSpent);
+router.get("/types", getSpentsByTypes);
 
 module.exports = router;
