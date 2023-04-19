@@ -28,5 +28,9 @@ module.exports = (sequelize) => {
     descripcion: {
       type: DataTypes.STRING,
     },
+    paymentProof: {
+      type: DataTypes.BLOB("long"),
+      allowNull: true,
+    },
   });
 };
