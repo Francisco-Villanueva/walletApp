@@ -16,6 +16,7 @@ export default function Gastos({ gastos }) {
           name={m.name}
           mount={m.mount}
           color={m.color}
+          description={m.description}
           onClick={() => handleNav(m.name)}
         />
       ))}

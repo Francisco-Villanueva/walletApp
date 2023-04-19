@@ -1,7 +1,9 @@
 .cardSpent-contianer {
   display: grid;
-  grid-template-columns: 8fr 2fr;
+  grid-template-columns: 8fr 2fr 0.5fr;
   padding: 0 1rem;
+  align-items: center;
+  gap: 1em;
 }
 .receptor {
   display: flex;
@@ -24,4 +26,10 @@
 }
 .cardSpent-contianer__body__mount h4 {
   margin: 0;
+}
+.cardSpent-contianer__body__icon {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1em;
 }

@@ -22,6 +22,13 @@ export const createUser = (user) => {
     const res = await axios.post("http://localhost:4000/users", user);
     console.log("entroe el createUser() ", res.data);
 
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "User created successfully",
+      showConfirmButton: false,
+      timer: 500,
+    });
     return res;
   };
 };
@@ -81,11 +88,25 @@ export const deleteSpent = (id) => {
     try {
       await axios.delete(`http://localhost:4000/spent/${id}`);
 
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Spent deleted successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return {
         type: actionTypes.DELETE_SPENTS,
         payload: id,
       };
     } catch (error) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Error at deleting spent",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       throw new Error(error);
     }
   };

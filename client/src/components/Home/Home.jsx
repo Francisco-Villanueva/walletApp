@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllSpents } from "../../redux/actions";
 import NewSpent from "./Gastos/NewSpent/NewSpent";
 import { Chart, ArcElement } from "chart.js";
+import NavBar from "../Navbar/NavBar";
+
 Chart.register(ArcElement);
 
 export default function Home({ typesSpents }) {
@@ -32,23 +34,28 @@ export default function Home({ typesSpents }) {
   // console.log("gastos hechos: ", gastosPorType, "\nsuma: ", total);
 
   return (
-    <div className="home-main focus-in-expand">
-      <section className="top">
-        <h1>Abril</h1>
-        <h3>$ {total.toLocaleString("de-DE")}</h3>
-      </section>
-      <section className="mid">
-        <div className="numbersInputs">
+    <div className="home-main">
+      <div className="navBar-container">
+        <NavBar />
+      </div>
+      <div className="home-body">
+        <div className="newSpent-main-container">
           <NewSpent />
         </div>
-        <div className="grafico-cont">
-          {/* <Pie data={DATA} options={true} redraw={false} /> */}
-          <Doughnut data={DATA} options={false} redraw={false} />
+        <div className="mounth-total-container">
+          <h1>Abril</h1>
+          <h3>$ {total.toLocaleString("de-DE")}</h3>
         </div>
-        <div className="labels-container">
-          <Gastos gastos={typesSpents} />
+        <div className="mid">
+          <div className="grafico-cont">
+            {/* <Pie data={DATA} options={true} redraw={false} /> */}
+            <Doughnut data={DATA} options={false} redraw={false} />
+          </div>
+          <div className="labels-container">
+            <Gastos gastos={typesSpents} />
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

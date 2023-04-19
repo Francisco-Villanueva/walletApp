@@ -10,6 +10,7 @@ export default function NewSpent() {
     type: "",
     place: "",
     amount: "",
+    descripcion: "",
   });
   const dispatch = useDispatch();
   const handleInputChange = (e) => {
@@ -26,6 +27,7 @@ export default function NewSpent() {
       type: "",
       place: "",
       amount: "",
+      descripcion: "",
     });
   };
   return (
@@ -94,6 +96,14 @@ export default function NewSpent() {
           type="numer"
           placeholder="$"
           value={newGasto.amount}
+        />
+        <input
+          name="descripcion"
+          onChange={handleInputChange}
+          className="selectSty descripcion"
+          type="numer"
+          placeholder="Descripcion"
+          value={newGasto.descripcion}
         />
       </div>
       <button className="newSpent-btn" onClick={handleSubmitNewSpent}>

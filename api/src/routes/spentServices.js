@@ -13,9 +13,9 @@ const getSpents = async (req, res) => {
 
 const createSpent = async (req, res) => {
   try {
-    const { name, type, amount, place } = req.body;
+    const { name, type, amount, place, descripcion } = req.body;
 
-    if (!name || !type || !amount || !place) {
+    if (!name || !type || !amount || !place || !descripcion) {
       return res.status(400).send("Data mistakes!");
     }
     const newSpent = await Spent.create({
@@ -23,6 +23,7 @@ const createSpent = async (req, res) => {
       type: type,
       amount: amount,
       place: place,
+      descripcion: descripcion,
     });
 
     res.status(200).send(newSpent);

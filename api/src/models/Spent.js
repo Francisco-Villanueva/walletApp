@@ -25,5 +25,8 @@ module.exports = (sequelize) => {
     place: {
       type: DataTypes.STRING,
     },
+    descripcion: {
+      type: DataTypes.STRING,
+    },
   });
 };

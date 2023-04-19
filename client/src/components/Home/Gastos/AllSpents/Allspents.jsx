@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getAllSpents, deleteSpent } from "../../../../../src/redux/actions";
+import Swal from "sweetalert2";
+
 import "./Allsents.css";
 import { useParams } from "react-router-dom";
 import CardSpent from "./spentCard/CardSpent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartPie, faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -61,6 +64,30 @@ export default function Allspents({ spents }) {
   };
   const total = spents_filter.reduce((acc, s) => acc + s.amount, 0);
   // console.log(type, spents_filter);
+
+  //FUNCIONALIDADES PARA EL DELETEO MÚLTIPLE
+  const [selectedCards, setSelectedCards] = useState([]);
+  const dispatch = useDispatch();
+  const handleCheckboxChange = (e, id) => {
+    if (e.target.checked) {
+      setSelectedCards([...selectedCards, id]);
+    } else {
+      setSelectedCards(selectedCards.filter((selectedId) => selectedId !== id));
+    }
+  };
+
+  const handleDeleteSpent = (id) => {
+    dispatch(deleteSpent(id));
+    dispatch(getAllSpents());
+    // dispatch(deleteSpent(id));
+  };
+  const handleDeleteSelected = () => {
+    selectedCards.forEach((id) => handleDeleteSpent(id));
+    // deleteCard(selectedCards);
+    setSelectedCards([]);
+  };
+
+  console.log("selectedCards", selectedCards);
   return (
     <div className="allSpents-contianer">
       <div className="arrow-cont" onClick={handleBackPage}>
@@ -84,20 +111,50 @@ export default function Allspents({ spents }) {
         {/* <h3 style={{ margin: 0 }} className="allSpents-contianer__title">
           Detalle{" "}
         </h3> */}
-        <span
+        <div
           style={{
-            fontSize: ".85em",
-            fontWeight: "600",
-            fontStyle: "italic",
-            color: "#6c757d",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: "40px",
           }}
         >
-          {spents_filter.length} gastos del mes
-        </span>
-
+          <span
+            style={{
+              fontSize: ".85em",
+              fontWeight: "600",
+              fontStyle: "italic",
+              color: "#6c757d",
+            }}
+          >
+            {spents_filter.length} gastos del mes
+          </span>
+          {selectedCards.length > 0 ? (
+            <button
+              onClick={handleDeleteSelected}
+              className={`btn-multipleDelete focus-in-expand  }`}
+            >
+              {" "}
+              Eliminar seleccionados
+            </button>
+          ) : (
+            ""
+          )}
+        </div>
         <div className="allSpents-Cards-Container">
           {spents_filter.map((s) => (
-            <CardSpent spent={s} />
+            <div
+              key={s.id}
+              style={{ display: "grid", gridTemplateColumns: ".2fr 7fr" }}
+            >
+              <input
+                className="allSpents-Cards-Container__checkbox"
+                type="checkbox"
+                onChange={(e) => handleCheckboxChange(e, s.id)}
+              />
+
+              <CardSpent spent={s} />
+            </div>
           ))}
         </div>
       </section>

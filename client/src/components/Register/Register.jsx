@@ -20,7 +20,7 @@ export default function Register() {
 
   const handleRegisterClick = () => {
     setExit(exit === true ? false : true);
-    setTimeout(() => navigate("/"), 500);
+    setTimeout(() => navigate("/"), 800);
   };
 
   const handleSubmitUser = (e) => {
