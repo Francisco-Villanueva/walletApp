@@ -2,7 +2,7 @@ import React from "react";
 import "./Gastos.css";
 import GastoCard from "./Cards/GastoCard";
 import { useNavigate } from "react-router-dom";
-export default function Gastos({ gastos }) {
+export default function Gastos({ gastos, userName }) {
   // console.log("GASTOS: ", gastos);
   gastos.sort((a, b) => b.mount - a.mount);
   const navigate = useNavigate();
@@ -13,10 +13,10 @@ export default function Gastos({ gastos }) {
     <div className="gastos-container">
       {gastos.map((m) => (
         <GastoCard
+          userName={userName}
           name={m.name}
           mount={m.mount}
           color={m.color}
-          description={m.description}
           onClick={() => handleNav(m.name)}
         />
       ))}

@@ -7,7 +7,13 @@ import {
   faWallet,
 } from "@fortawesome/free-solid-svg-icons";
 import walletimg from "../../img/wallet.png";
-export default function NavBar() {
+
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+
+export default function NavBar({ userName }) {
   return (
     <div className="navbar-main">
       <div className="navbar-logo">
@@ -39,7 +45,7 @@ export default function NavBar() {
         />
         <span style={{ display: "flex", flexDirection: "column" }}>
           <span style={{ fontSize: ".75rem", fontWeight: "bolder" }}>
-            Pancho
+            {userName}
           </span>
           <span style={{ fontSize: ".75rem", color: "#fff" }}>$12.450</span>
         </span>

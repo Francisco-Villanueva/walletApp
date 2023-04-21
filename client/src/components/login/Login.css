@@ -36,11 +36,7 @@
   gap: 1rem;
   flex-direction: column;
 }
-.login-input input {
-  outline: none;
-  padding: 0.4em 0.8em;
-  font-weight: 800;
-}
+
 .login-bottom button {
   font-weight: 800;
   background-color: #24294acb;
@@ -59,10 +55,11 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
 .pwIncorrect {
-  color: red;
-  border-color: red;
+  color: purple;
   transition: all 1s;
+  font-size: 3rem;
 }
 
 /*------------------------------- CLASES PARA EFECTOS */

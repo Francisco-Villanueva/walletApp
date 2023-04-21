@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import "./CardSpent.css";
+
+import ComprobantePago from "../Comprobante/ComprobantePago";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChartPie,
   faArrowLeftLongToLine,
   faTrash,
+  faFilePdf,
 } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { deleteSpent, getAllSpents } from "../../../../../redux/actions";
-export default function CardSpent({ spent, checked }) {
+export default function CardSpent({ spent }) {
+  console.log("SPENT", spent);
   const handleDate = (date) => {
     const fecha = new Date(date);
 
@@ -52,6 +56,11 @@ export default function CardSpent({ spent, checked }) {
     // dispatch(deleteSpent(id));
   };
 
+  const [comprobantePago, setComprobantePago] = useState(null);
+
+  const handleVerComprobante = (url) => {
+    setComprobantePago(url);
+  };
   return (
     <div className="cardSpent-contianer">
       <div className="receptor">
@@ -76,7 +85,18 @@ export default function CardSpent({ spent, checked }) {
           className="SpentTrash"
           onClick={() => handleDeleteSpent(spent.id)}
         />
+        {spent.paymentProof ? (
+          <FontAwesomeIcon
+            icon={faFilePdf}
+            className="SpentTrash"
+            onClick={() => handleVerComprobante(spent.paymentProof)}
+          />
+        ) : (
+          ""
+        )}
       </div>
+
+      {comprobantePago ? <ComprobantePago src={comprobantePago} /> : null}
     </div>
   );
 }

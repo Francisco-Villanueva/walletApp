@@ -4,16 +4,28 @@ import walletimg from "../../img/wallet.png";
 import "./Register.css";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../../redux/actions";
+import { getPasswordStrength } from "./Helpers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCheck,
+  faCheckCircle,
+  faCircleCheck,
+  faCircleXmark,
+} from "@fortawesome/free-solid-svg-icons";
 export default function Register() {
   const dispatch = useDispatch();
   const [exit, setExit] = useState(false);
-  const [pwMsj, setPwMsj] = useState(
-    "La contraseña debe contener al menos una letra mayúscula y un número."
-  );
+
   const [data, setData] = useState({
     userName: "",
     userEmail: "",
     userPw: "",
+  });
+
+  const [requirements, setRequirements] = useState({
+    length: false,
+    uppercase: false,
+    number: false,
   });
 
   const navigate = useNavigate();
@@ -41,18 +53,25 @@ export default function Register() {
 
   function verificarPassword(password) {
     // expresión regular para verificar la presencia de al menos una letra mayúscula y un número
-    var regex = /^(?=.*[A-Z])(?=.*\d)/;
+    const lengthRegex = /.{8,}/;
+    const uppercaseRegex = /[A-Z]/;
+    const numberRegex = /[0-9]/;
 
-    // comprobar si la contraseña cumple con la expresión regular
-    let msj = "";
-    if (regex.test(password)) {
-      msj = "La contraseña es válida.";
-      setPwMsj(msj);
+    //  getPasswordStrength(password);
+
+    setRequirements({
+      length: lengthRegex.test(password),
+      uppercase: uppercaseRegex.test(password),
+      number: numberRegex.test(password),
+    });
+
+    if (
+      lengthRegex.test(password) &&
+      uppercaseRegex.test(password) &&
+      numberRegex.test(password)
+    ) {
       return true;
     } else {
-      setPwMsj(
-        "La contraseña debe contener al menos una letra mayúscula y un número."
-      );
       return false;
     }
   }
@@ -62,6 +81,7 @@ export default function Register() {
 
   const handleInputChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
+
     if ([e.target.name] == "userPw") {
       if (verificarPassword(e.target.value)) {
         setClassPw(true);
@@ -94,39 +114,143 @@ export default function Register() {
       </div>
       <div className="login-bottom slide-in-top">
         <div className="login-input">
-          <input
-            name="userName"
-            type="text"
-            placeholder="User name"
-            onChange={handleInputChange}
-          />
-          <input
-            name="userEmail"
-            type="email"
-            placeholder="Email"
-            onChange={handleInputChange}
-          />
-          <input
-            name="userPw"
-            type="password"
-            placeholder="Password"
-            className={calsePw ? "pwCumple" : "pwNoCumple"}
-            onChange={handleInputChange}
-          />
-          <span
-            className="pwMsj"
-            style={calsePw ? { display: "none" } : { visibility: "visible" }}
-          >
-            {" "}
-            {pwMsj}
-          </span>
-          <input
-            name="userPw2"
-            type="password"
-            className={pwCoinciden ? "pwCumple" : "pwNoCumple"}
-            placeholder="Confirm Password"
-            onChange={handleInputChange}
-          />
+          <div className="inputContainer ">
+            <input
+              name="userName"
+              type="text"
+              placeholder="User name"
+              onChange={handleInputChange}
+              className="register-input"
+            />
+            <label for="username" className="label-register">
+              User Name
+            </label>
+          </div>
+          <div className="inputContainer ">
+            <input
+              name="userEmail"
+              type="email"
+              placeholder="Email"
+              onChange={handleInputChange}
+              className="register-input"
+            />
+            <label for="username" className="label-register">
+              Email
+            </label>
+          </div>
+          <div className="inputContainer  inputContainer-pw1">
+            <input
+              name="userPw"
+              type="password"
+              placeholder="Password"
+              className={
+                calsePw
+                  ? "pwCumple register-input"
+                  : "pwNoCumple register-input"
+              }
+              onChange={handleInputChange}
+            />
+            <label for="username" className="label-register">
+              Password
+            </label>
+            <ul className="pw-requirements-container">
+              <span
+                style={{
+                  color: getPasswordStrength(data.userPw).color,
+                  fontWeight: "800",
+                  letterSpacing: "1px",
+                  fontStyle: "italic",
+                }}
+              >
+                {getPasswordStrength(data.userPw).strength}
+              </span>
+              <li
+                className={`pw-requirements-items ${
+                  requirements.length ? "pwRegCumple" : "pwRegNoCumple"
+                }`}
+              >
+                {requirements.length ? (
+                  <FontAwesomeIcon
+                    className="pwRegCumple"
+                    icon={faCheckCircle}
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    className="pwRegNoCumple"
+                    icon={faCircleXmark}
+                  />
+                )}
+                Al menos 8 caracteres
+              </li>
+              <li
+                className={`pw-requirements-items ${
+                  requirements.uppercase ? "pwRegCumple" : "pwRegNoCumple"
+                }`}
+              >
+                {requirements.uppercase ? (
+                  <FontAwesomeIcon
+                    className="pwRegCumple"
+                    icon={faCheckCircle}
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    className="pwRegNoCumple"
+                    icon={faCircleXmark}
+                  />
+                )}
+                Al menos una letra mayúscula
+              </li>
+              <li
+                className={`pw-requirements-items ${
+                  requirements.number ? "pwRegCumple" : "pwRegNoCumple"
+                }`}
+              >
+                {requirements.number ? (
+                  <FontAwesomeIcon
+                    className="pwRegCumple"
+                    icon={faCheckCircle}
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    className="pwRegNoCumple"
+                    icon={faCircleXmark}
+                  />
+                )}
+                Al menos un número
+              </li>
+            </ul>
+          </div>
+          <div className="inputContainer inputContainer-pw2">
+            <input
+              name="userPw2"
+              type="password"
+              className={
+                pwCoinciden
+                  ? " register-input pwCumple"
+                  : "register-input pwNoCumple"
+              }
+              placeholder="Confirm Password"
+              onChange={handleInputChange}
+            />
+            <label for="username" className="label-register">
+              Confirm Password
+            </label>
+            <span
+              className={`pw2-style pw-requirements-items ${
+                pwCoinciden ? "pwRegCumple" : "pwRegNoCumple"
+              }`}
+            >
+              {pwCoinciden ? (
+                <FontAwesomeIcon className="pwRegCumple" icon={faCheckCircle} />
+              ) : (
+                <FontAwesomeIcon
+                  className="pwRegNoCumple"
+                  icon={faCircleXmark}
+                />
+              )}
+              Las contraseñas coinciden
+            </span>
+          </div>
         </div>
         <button
           className="register-btn"

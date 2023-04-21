@@ -2,6 +2,7 @@ import { actionTypes } from "../actions";
 
 const intialState = {
   users: [],
+  actualUser: "",
   spents: [],
   spentsByTypes: [],
 };
@@ -32,6 +33,13 @@ const rootReducer = (state = intialState, action) => {
       return {
         ...state,
         spentsByTypes: action.payload,
+      };
+    }
+
+    case actionTypes.SET_USER_ACTUAL: {
+      return {
+        ...state,
+        actualUser: action.payload,
       };
     }
     default:

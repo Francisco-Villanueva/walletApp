@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { USERS } from "./data";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../redux/actions";
+import { getUser, setUserActual } from "../../redux/actions";
 export default function Login() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -24,11 +24,12 @@ export default function Login() {
     const aux = usuarios.filter(
       (e) => e.name === userToCheck.userName || e.email === userToCheck.userName
     );
-    console.log("aux", aux[0]);
+    // console.log("aux", aux[0]);
     if (aux.length != 0) {
       if (aux[0].pw === userToCheck.userPw) {
         setExit(exit === true ? false : true);
-        setTimeout(() => navigate("/home"), 1000);
+        dispatch(setUserActual(user.userName));
+        setTimeout(() => navigate(`/home`), 1000);
       } else {
         setValidPw(true);
         // alert(`Pw INCO ${aux.userPw}  !=  ${userToCheck.userPW}`);
@@ -52,6 +53,7 @@ export default function Login() {
 
   const handleRegisterClick = () => {
     setExit(exit === true ? false : true);
+
     setTimeout(() => navigate("/register"), 500);
   };
   return (
@@ -66,19 +68,35 @@ export default function Login() {
       </div>
       <div className="login-bottom slide-in-top">
         <div className="login-input">
-          <input
-            name="userName"
-            type="text"
-            placeholder="User name"
-            onChange={handleInputChange}
-          />
-          <input
-            name="userPw"
-            type="password"
-            className={validPw ? "pwIncorrect" : "pwCorrect"}
-            placeholder="Password"
-            onChange={handleInputChange}
-          />
+          <div className="inputContainer">
+            <input
+              name="userName"
+              type="text"
+              placeholder="User name"
+              onChange={handleInputChange}
+              className="register-input"
+            />
+            <label for="username" className="label-register">
+              User Name
+            </label>
+          </div>
+
+          <div className="inputContainer">
+            <input
+              name="userPw"
+              type="password"
+              className={
+                validPw
+                  ? "register-input pwIncorrect pwCorrect "
+                  : "register-input pwCorrect"
+              }
+              placeholder="Password"
+              onChange={handleInputChange}
+            />
+            <label for="username" className="label-register">
+              Password
+            </label>
+          </div>
           {/* <span className={validPw ? "pwIncorrect" : "pwCorrect"}>
             Incorrect password
           </span> */}

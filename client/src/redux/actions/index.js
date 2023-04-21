@@ -5,6 +5,7 @@ export const actionTypes = {
   GET_SPENTS: "GET_SPENTS",
   GET_SPENTS_BY_TYPES: "GET_SPENTS_BY_TYPES",
   DELETE_SPENTS: "DELETE_SPENTS",
+  SET_USER_ACTUAL: "SET_USER_ACTUAL",
 };
 export const getUser = () => {
   return async function (dispatch) {
@@ -14,6 +15,14 @@ export const getUser = () => {
       type: actionTypes.GET_USERS,
       payload: res.data,
     });
+  };
+};
+
+export const setUserActual = (user) => {
+  console.log("entroe el setUserActual() ", user);
+  return {
+    type: actionTypes.SET_USER_ACTUAL,
+    payload: user,
   };
 };
 
