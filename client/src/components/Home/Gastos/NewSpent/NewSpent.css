@@ -27,7 +27,7 @@
 }
 .form-newSpent-section-mid {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 4fr 0.5fr;
   gap: 1rem;
 }
 .selectSty {

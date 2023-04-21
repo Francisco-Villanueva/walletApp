@@ -1,6 +1,6 @@
 .navbar-main {
   display: flex;
-  background-color: #acb8d4ea;
+  background-color: #1f44c9;
   color: #fff;
   justify-content: space-between;
   align-items: center;
@@ -14,6 +14,7 @@
   gap: 0.5rem;
   color: #fff;
   filter: drop-shadow(-2px -3px 2px #3c5ba5);
+  cursor: pointer;
 }
 .navbar-links {
   display: flex;
@@ -26,5 +27,4 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  color: #284ca0;
 }

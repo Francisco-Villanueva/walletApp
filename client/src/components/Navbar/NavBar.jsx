@@ -6,17 +6,12 @@ import {
   faUserCircle,
   faWallet,
 } from "@fortawesome/free-solid-svg-icons";
-import walletimg from "../../img/wallet.png";
-
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-
+import { useNavigate } from "react-router-dom";
 export default function NavBar({ userName }) {
+  const navigation = useNavigate();
   return (
     <div className="navbar-main">
-      <div className="navbar-logo">
+      <div className="navbar-logo" onClick={() => navigation("/home")}>
         <FontAwesomeIcon icon={faWallet} />
         <span
           style={{
@@ -31,7 +26,14 @@ export default function NavBar({ userName }) {
       </div>
 
       <div className="navbar-links">
-        <p>Home</p>
+        <p
+          onClick={() => {
+            navigation("/wallet");
+          }}
+          style={{ cursor: "pointer" }}
+        >
+          Wallet
+        </p>
         <p>About</p>
         <p>Contact</p>
       </div>

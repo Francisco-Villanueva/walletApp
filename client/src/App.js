@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getAllSpents, getSpentsByTypes } from "./redux/actions";
 import Allspents from "./components/Home/Gastos/AllSpents/Allspents";
+import Wallet from "./components/Wallet/Wallet";
 
 function App() {
   const allSpents = useSelector((state) => state.spents);
@@ -31,6 +32,8 @@ function App() {
           path="/allSpents/:type"
           element={<Allspents spents={allSpents} />}
         />
+
+        <Route path="/wallet" element={<Wallet spents={allSpents} />} />
       </Routes>
     </div>
   );
