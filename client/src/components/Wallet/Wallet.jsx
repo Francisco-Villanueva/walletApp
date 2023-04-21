@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Wallet.css";
 import NavBar from "../Navbar/NavBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faWallet } from "@fortawesome/free-solid-svg-icons";
 import CardSpent from "../Home/Gastos/AllSpents/spentCard/CardSpent";
-import { useDispatch } from "react-redux";
-import { deleteSpent, getAllSpents } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteSpent, getAllSpents, getWallets } from "../../redux/actions";
 
 export default function Wallet({ spents }) {
   const dispatch = useDispatch();
   const [selectedCards, setSelectedCards] = useState([]);
 
+  useEffect(() => {
+    dispatch(getWallets());
+  }, []);
+
+  const wallet = useSelector((s) => s.wallets);
+  console.log("Wallets,", wallet);
   const handleCheckboxChange = (e, id) => {
     if (e.target.checked) {
       setSelectedCards([...selectedCards, id]);
@@ -30,6 +36,12 @@ export default function Wallet({ spents }) {
     setSelectedCards([]);
   };
 
+  const totalCuenta = (walletMoney) => {
+    let totalSpents =
+      spents.length > 0 ? spents.reduce((cc, t) => cc + t.amount, 0) : 0;
+    console.log("totalSpents", totalSpents);
+    return walletMoney - totalSpents;
+  };
   return (
     <div className="navBar-main">
       <section className="wallet-navbar-container">
@@ -40,7 +52,12 @@ export default function Wallet({ spents }) {
         <div className="wallet-body__div wallet-body__money">
           <div>
             <span>Dinero disponible</span>
-            <h3 style={{ margin: 0, fontSize: "2.8rem" }}>$15.678</h3>
+            <h3 style={{ margin: 0, fontSize: "2.8rem" }}>
+              ${" "}
+              {wallet.length > 0
+                ? totalCuenta(wallet[2].money).toLocaleString("de-DE")
+                : "-loading"}
+            </h3>
           </div>
           <div
             style={{

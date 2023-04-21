@@ -6,6 +6,7 @@ export const actionTypes = {
   GET_SPENTS_BY_TYPES: "GET_SPENTS_BY_TYPES",
   DELETE_SPENTS: "DELETE_SPENTS",
   SET_USER_ACTUAL: "SET_USER_ACTUAL",
+  GET_WALLETS: "GET_WALLETS",
 };
 export const getUser = () => {
   return async function (dispatch) {
@@ -131,6 +132,41 @@ export const getSpentsByTypes = (type) => {
         type: actionTypes.GET_SPENTS_BY_TYPES,
         payload: res.data,
       });
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+};
+
+export const getWallets = () => {
+  return async function (dispatch) {
+    try {
+      const resp = await axios.get(`http://localhost:4000/wallet`);
+
+      return dispatch({
+        type: actionTypes.GET_WALLETS,
+        payload: resp.data,
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+};
+
+export const createWallet = (wallet) => {
+  return async function () {
+    try {
+      const res = await axios.post("http://localhost:4000/wallet", wallet);
+
+      // Swal.fire({
+      //   position: "center",
+      //   icon: "success",
+      //   title: "Wallet created successfully",
+      //   showConfirmButton: false,
+      //   timer: 1500,
+      // });
+
+      return res;
     } catch (error) {
       throw new Error(error);
     }

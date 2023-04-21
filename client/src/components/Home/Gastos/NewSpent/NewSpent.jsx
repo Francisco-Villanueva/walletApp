@@ -144,6 +144,7 @@ export default function NewSpent() {
                 type="file"
                 accept=".jpg,.jpeg,.png,.pdf"
                 onChange={handleFileChange}
+                style={{ width: "20%", margin: "0" }}
               />
             </label>
           </div>

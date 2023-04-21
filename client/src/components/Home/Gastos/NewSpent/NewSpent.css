@@ -21,15 +21,6 @@
   grid-template-rows: 0.1fr 2fr 0.1fr;
   gap: 1rem;
 }
-.form-newSpent-section {
-  /* border: 1px solid #dadcpadde059; */
-  padding: 1em;
-}
-.form-newSpent-section-mid {
-  display: grid;
-  grid-template-columns: 4fr 0.5fr;
-  gap: 1rem;
-}
 .selectSty {
   font-family: "Montserrat";
   border: none;
@@ -39,7 +30,20 @@
   font-size: 1rem;
   width: 50%;
   font-weight: 900;
+  /* border: #000 1px solid; */
 }
+.form-newSpent-section {
+  /* border: 1px solid #dadcpadde059; */
+  /* padding: 1em; */
+}
+.form-newSpent-section-mid {
+  display: grid;
+  /* grid-template-columns: 4fr 0.5fr; */
+  grid-template-columns: 2fr 1fr;
+  gap: 1em;
+  padding: 0 1em;
+}
+
 .newSpent-input-container {
   display: flex;
   flex-direction: column;
@@ -53,9 +57,8 @@
   border-radius: 7px;
   padding: 0.8em 1em;
   outline: none;
-  z-index: 1;
   transition: all 0.15s;
-  width: 80%;
+  width: 70%;
   background-color: #cececea2;
 }
 .newSpent-input:focus {
@@ -97,7 +100,6 @@
 .input-file {
   /* Estilo personalizado para el botón de carga */
   position: relative;
-  display: inline-block;
 }
 .input-file::before {
   background-color: #cececea2;
@@ -115,6 +117,8 @@
   top: 0;
   bottom: 0;
   cursor: pointer;
+  width: 80%;
+  padding: 0;
 }
 
 .input-file input[type="file"] {

@@ -21,4 +21,9 @@ router.get("/spent/:id", getSpentsById);
 router.delete("/spent/:id", deleteSpent);
 router.get("/types", getSpentsByTypes);
 
+const { getWallets, createWallet } = require("./walletServices");
+
+router.get("/wallet", getWallets);
+router.post("/wallet", createWallet);
+
 module.exports = router;

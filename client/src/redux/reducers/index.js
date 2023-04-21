@@ -5,6 +5,7 @@ const intialState = {
   actualUser: "",
   spents: [],
   spentsByTypes: [],
+  wallets: [],
 };
 
 const rootReducer = (state = intialState, action) => {
@@ -40,6 +41,13 @@ const rootReducer = (state = intialState, action) => {
       return {
         ...state,
         actualUser: action.payload,
+      };
+    }
+
+    case actionTypes.GET_WALLETS: {
+      return {
+        ...state,
+        wallets: action.payload,
       };
     }
     default:
