@@ -25,12 +25,14 @@
   font-family: "Montserrat";
   border: none;
   outline: none;
-  border-radius: 0.3em;
+  border-radius: 0.5em;
   padding: 0.5em 1.3em;
   font-size: 1rem;
-  width: 50%;
+  width: 40%;
   font-weight: 900;
-  /* border: #000 1px solid; */
+  border-bottom: #0000004f 1px solid;
+  margin: 0 2em;
+  background-color: #00000017;
 }
 .form-newSpent-section {
   /* border: 1px solid #dadcpadde059; */

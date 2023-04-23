@@ -91,76 +91,77 @@ export default function Allspents({ spents }) {
   return (
     <div className="allSpents-contianer">
       <section className="allSpentents__arrow-container">
-
-      <div className="arrow-cont" onClick={handleBackPage}>
-        <FontAwesomeIcon icon={faArrowLeftLong} />
-      </div>
-      </section>
-      <section className="allSpents-header">
-        <div>
-          <h1 style={{ margin: 0 }} className="allSpents-contianer__title">
-            {type}
-          </h1>
-          <span>Abril</span>
-        </div>
-        <div>
-          <h1> $ {total.toLocaleString("de-DE")}</h1>
+        <div className="arrow-cont" onClick={handleBackPage}>
+          <FontAwesomeIcon icon={faArrowLeftLong} />
         </div>
       </section>
-      <section className="allSpents-graphics">
-        <Bar data={data} options={true} />
-      </section>
-      <section className="allSpents-body">
-        {/* <h3 style={{ margin: 0 }} className="allSpents-contianer__title">
+      <div className="allSpents__body">
+        <section className="allSpents-header">
+          <div>
+            <h1 style={{ margin: 0 }} className="allSpents-contianer__title">
+              {type}
+            </h1>
+            <span>Abril</span>
+          </div>
+          <div>
+            <h1> $ {total.toLocaleString("de-DE")}</h1>
+          </div>
+        </section>
+        <section className="allSpents-graphics">
+          <Bar data={data} options={true} />
+        </section>
+        <section className="allSpents-body">
+          {/* <h3 style={{ margin: 0 }} className="allSpents-contianer__title">
           Detalle{" "}
         </h3> */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            height: "40px",
-          }}
-        >
-          <span
+          <div
             style={{
-              fontSize: ".85em",
-              fontWeight: "600",
-              fontStyle: "italic",
-              color: "#6c757d",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              height: "40px",
             }}
           >
-            {spents_filter.length} gastos del mes
-          </span>
-          {selectedCards.length > 0 ? (
-            <button
-              onClick={handleDeleteSelected}
-              className={`btn-multipleDelete focus-in-expand  }`}
+            <span
+              style={{
+                fontSize: ".85em",
+                fontWeight: "600",
+                fontStyle: "italic",
+                color: "#6c757d",
+              }}
             >
-              {" "}
-              Eliminar seleccionados
-            </button>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className="allSpents-Cards-Container">
-          {spents_filter.map((s) => (
-            <div
-              key={s.id}
-              style={{ display: "grid", gridTemplateColumns: ".2fr 7fr" }}
-            >
-              <input
-                className="allSpents-Cards-Container__checkbox"
-                type="checkbox"
-                onChange={(e) => handleCheckboxChange(e, s.id)}
-              />
+              {spents_filter.length} gastos del mes
+            </span>
+            {selectedCards.length > 0 ? (
+              <button
+                onClick={handleDeleteSelected}
+                className={`btn-multipleDelete focus-in-expand  }`}
+              >
+                {" "}
+                Eliminar seleccionados
+              </button>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="allSpents-Cards-Container">
+            {spents_filter.map((s) => (
+              <div
+                key={s.id}
+                style={{ display: "grid", gridTemplateColumns: ".2fr 7fr" }}
+              >
+                <input
+                  className="allSpents-Cards-Container__checkbox"
+                  type="checkbox"
+                  onChange={(e) => handleCheckboxChange(e, s.id)}
+                />
 
-              <CardSpent spent={s} />
-            </div>
-          ))}
-        </div>
-      </section>
+                <CardSpent spent={s} />
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

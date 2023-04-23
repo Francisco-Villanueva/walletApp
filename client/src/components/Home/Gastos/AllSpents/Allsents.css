@@ -1,18 +1,17 @@
 .allSpents-contianer {
   gap: 1rem;
-  width: 90vw;
   height: 100vh;
   align-items: center;
   margin: 0 auto;
-  gap: 2rem;
-  /* border: 0.5px dashed #a8a7a7; */
+  padding: 1rem;
 }
-.allSpentents__arrow-container{
+.allSpentents__arrow-container {
   width: 100%;
   height: 30px;
 }
 .arrow-cont {
-  border: 1px solid #000000b0;
+  border: 1px solid #00000052;
+  color: #00000052;
   border-radius: 50%;
   padding: 0.3em;
   width: 20px;
@@ -21,7 +20,15 @@
   transition: all 0.3s;
 }
 .arrow-cont:hover {
-  background-color: #5071be;
+  background-color: #0033ffab;
+  border: 1px solid #000;
+  color: #000;
+}
+.allSpents__body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 .allSpents-header {
   /* width: 100%; */
