@@ -1,8 +1,8 @@
 .home-main {
   display: grid;
-  grid-template-rows: 0.3fr 7fr;
+  grid-template-rows: 1fr;
   max-width: 100vw;
-  min-width: 99vw;
+  min-height: 100%;
   background-color: #3c5ba5;
   color: #fff;
 }
@@ -14,8 +14,8 @@
   z-index: 1;
 }
 .home-body {
-  position: relative;
-  top: 5rem;
+  /* position: relative; */
+  margin-top: 3rem;
   padding: 1em 0;
   display: grid;
   grid-template-rows: 1fr 0.1fr 2fr;

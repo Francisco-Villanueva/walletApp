@@ -17,6 +17,7 @@ export default function Wallet({ spents }) {
 
   const wallet = useSelector((s) => s.wallets);
   console.log("Wallets,", wallet);
+
   const handleCheckboxChange = (e, id) => {
     if (e.target.checked) {
       setSelectedCards([...selectedCards, id]);
@@ -55,7 +56,7 @@ export default function Wallet({ spents }) {
             <h3 style={{ margin: 0, fontSize: "2.8rem" }}>
               ${" "}
               {wallet.length > 0
-                ? totalCuenta(wallet[2].money).toLocaleString("de-DE")
+                ? totalCuenta(wallet[0].money).toLocaleString("de-DE")
                 : "-loading"}
             </h3>
           </div>

@@ -90,9 +90,12 @@ export default function Allspents({ spents }) {
   console.log("selectedCards", selectedCards);
   return (
     <div className="allSpents-contianer">
+      <section className="allSpentents__arrow-container">
+
       <div className="arrow-cont" onClick={handleBackPage}>
         <FontAwesomeIcon icon={faArrowLeftLong} />
       </div>
+      </section>
       <section className="allSpents-header">
         <div>
           <h1 style={{ margin: 0 }} className="allSpents-contianer__title">
