@@ -4,14 +4,14 @@
   padding: 1.5em;
   border-radius: 0.4em;
   border-bottom: 1px solid #cecece;
-  color: #fff;
+  color: #000;
   cursor: pointer;
   transition: all 0.3s;
 }
 
 .gastoCard-cont:hover {
-  background-color: #f5f5f5;
-  color: #000;
+  background-color: #3c5ba5;
+  color: #fff;
 }
 .gastoCard-cont:hover .typeName {
   font-weight: 900;

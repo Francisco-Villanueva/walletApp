@@ -26,7 +26,9 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route
           path="/home"
-          element={<Home typesSpents={spentsByType_filter} />}
+          element={
+            <Home typesSpents={spentsByType_filter} wallets={allWallets} />
+          }
         />
         <Route path="/register" element={<Register />} />
         <Route

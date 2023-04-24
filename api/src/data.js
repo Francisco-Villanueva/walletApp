@@ -2,52 +2,52 @@ const TYPES = [
   {
     name: "Indumentaria",
     mount: 0,
-    color: "#332b3e",
+    color: "#1e253a",
   },
   {
     name: "Comidas y bebidas",
     mount: 0,
-    color: "#533a63",
+    color: "#4f5a84",
   },
   {
     name: "Transporte",
     mount: 0,
-    color: "#894e7c",
+    color: "#283345",
   },
   {
     name: "Hogar",
     mount: 0,
-    color: "#d16b97",
+    color: "#8997d8",
   },
   {
     name: "Salud",
     mount: 0,
-    color: "#ff95af",
+    color: "#8e84bc",
   },
   {
     name: "Entretenimiento",
     mount: 0,
-    color: "#9c8ec1",
+    color: "#002a8b",
   },
   {
     name: "Supermercado",
     mount: 0,
-    color: "#e2ccff",
+    color: "#4b56b5",
   },
   {
     name: "Otros",
     mount: 0,
-    color: "#623153",
+    color: "#a793e7",
   },
   {
     name: "Prestamos y financiación",
     mount: 0,
-    color: "#90415d",
+    color: "#6391ff",
   },
   {
     name: "Pescadería",
     mount: 0,
-    color: "rgb(255, 205, 86)",
+    color: "#665978",
   },
 ];
 

@@ -1,10 +1,18 @@
 const expres = require("express");
 const router = expres.Router();
 
-const { test, getUsers, createUser } = require("./services");
+const {
+  test,
+  getUsers,
+  createUser,
+  getUsersById,
+  editUser,
+} = require("./services");
 
 router.get("/test", test);
 router.get("/users", getUsers);
+router.get("/users/:id", getUsersById);
+router.put("/users/:id", editUser);
 router.post("/users", createUser);
 
 const {

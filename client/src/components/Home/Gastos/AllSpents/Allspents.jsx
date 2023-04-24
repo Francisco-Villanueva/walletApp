@@ -96,7 +96,7 @@ export default function Allspents({ spents }) {
         </div>
       </section>
       <div className="allSpents__body">
-        <section className="allSpents-header">
+        <section className=" allSpents__body-section allSpents-header">
           <div>
             <h1 style={{ margin: 0 }} className="allSpents-contianer__title">
               {type}
@@ -107,10 +107,10 @@ export default function Allspents({ spents }) {
             <h1> $ {total.toLocaleString("de-DE")}</h1>
           </div>
         </section>
-        <section className="allSpents-graphics">
+        <section className="allSpents__body-section allSpents-graphics">
           <Bar data={data} options={true} />
         </section>
-        <section className="allSpents-body">
+        <section className="allSpents__body-section allSpents-gastos">
           {/* <h3 style={{ margin: 0 }} className="allSpents-contianer__title">
           Detalle{" "}
         </h3> */}

@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NavBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faGear,
   faUser,
   faUserCircle,
   faWallet,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+
+import User from "../User/User";
 export default function NavBar({ userName }) {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
   const navigation = useNavigate();
   return (
     <div className="navbar-main">
@@ -30,12 +41,12 @@ export default function NavBar({ userName }) {
           onClick={() => {
             navigation("/wallet");
           }}
-          style={{ cursor: "pointer" }}
+          className="navbar-links__p"
         >
           Wallet
         </p>
-        <p>About</p>
-        <p>Contact</p>
+        <p className="navbar-links__p">Finanzas</p>
+        <p className="navbar-links__p">Contact</p>
       </div>
 
       <div className="navbar-user">
@@ -51,6 +62,18 @@ export default function NavBar({ userName }) {
           </span>
           <span style={{ fontSize: ".75rem", color: "#fff" }}>$12.450</span>
         </span>
+
+        <div className="">
+          <User showModal={showModal} handleCloseModal={handleCloseModal} />
+        </div>
+        <div class="dropdown">
+          <div className="dropdown-item" onClick={handleShowModal}>
+            <FontAwesomeIcon icon={faUser} /> Profile
+          </div>
+          <div className="dropdown-item">
+            <FontAwesomeIcon icon={faGear} /> Settings
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -34,9 +34,54 @@ const createUser = async (req, res) => {
     res.status(400).send(error);
   }
 };
+const getUsersById = async (req, res) => {
+  try {
+    const { id } = req.params;
 
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return res.status(400).send("User not found!");
+    }
+
+    res.status(200).send(user);
+  } catch (error) {
+    console.log("ERROR:  ", error);
+    res.status(400).send(error);
+  }
+};
+
+const editUser = async (req, res) => {
+  try {
+    const { name, email, pw } = req.body;
+    const { id } = req.params;
+
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return res.status(400).send("User not found!");
+    }
+
+    const editUser = await User.update(
+      {
+        name: name,
+        email: email,
+        pw: pw,
+      },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+
+    res.status(200).send("User edited!");
+  } catch (error) {}
+};
 module.exports = {
   test,
   getUsers,
+  getUsersById,
   createUser,
+  editUser,
 };

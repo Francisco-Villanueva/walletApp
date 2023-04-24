@@ -1,9 +1,9 @@
 .gastos-container {
   display: flex;
   flex-direction: column;
-  background-color: #3c5ba5;
+  background-color: #fff;
   border-radius: 0.4em;
   border: 1px solid #fff;
   text-align: center;
-  color: #fff;
+  color: #000;
 }
