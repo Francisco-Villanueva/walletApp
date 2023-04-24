@@ -18,5 +18,11 @@ module.exports = (sequelize) => {
     pw: {
       type: DataTypes.STRING,
     },
+    cvu: {
+      type: DataTypes.BIGINT,
+    },
+    alias: {
+      type: DataTypes.STRING,
+    },
   });
 };

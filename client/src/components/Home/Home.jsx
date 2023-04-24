@@ -7,15 +7,21 @@ import NewSpent from "./Gastos/NewSpent/NewSpent";
 import { Chart, ArcElement } from "chart.js";
 import NavBar from "../Navbar/NavBar";
 import { useLocation, useParams } from "react-router-dom";
+import { getUserById } from "../../redux/actions";
 
 Chart.register(ArcElement);
 
 export default function Home({ typesSpents, wallets }) {
+  const dispatch = useDispatch();
   const allSpents = useSelector((s) => s.spents);
-  const userActual = useSelector((s) => s.actualUser);
+  const userLoged = useSelector((s) => s.userData);
+
+  // const userLoged = dispatch(getUserById(userActual.id));
+
+  console.log("userLoged", userLoged);
   const [showModal, setShowModal] = useState(false);
 
-  console.log("wallets", wallets);
+  // console.log("wallets", wallets);
 
   var total = allSpents.reduce((a, b) => a + b.amount, 0);
   var saldo = wallets.length > 0 ? wallets[0].money - total : 0;
@@ -46,7 +52,7 @@ export default function Home({ typesSpents, wallets }) {
   return (
     <div className="home-main">
       <div className="navBar-container">
-        <NavBar userName={userActual} />
+        <NavBar userName={"pepe"} />
       </div>
       <div className="home-body">
         <div className="mounth-total-container">

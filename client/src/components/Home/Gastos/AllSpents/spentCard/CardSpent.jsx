@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { deleteSpent, getAllSpents } from "../../../../../redux/actions";
 export default function CardSpent({ spent, buscador }) {
-  console.log("SPENT", spent);
+  // console.log("SPENT", spent);
   const handleDate = (date) => {
     const fecha = new Date(date);
 

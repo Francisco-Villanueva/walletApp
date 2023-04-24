@@ -66,7 +66,7 @@ export default function NavBar({ userName }) {
         <div className="">
           <User showModal={showModal} handleCloseModal={handleCloseModal} />
         </div>
-        <div class="dropdown">
+        <div className="dropdown">
           <div className="dropdown-item" onClick={handleShowModal}>
             <FontAwesomeIcon icon={faUser} /> Profile
           </div>

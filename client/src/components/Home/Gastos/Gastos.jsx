@@ -13,6 +13,7 @@ export default function Gastos({ gastos, userName }) {
     <div className="gastos-container">
       {gastos.map((m) => (
         <GastoCard
+          key={m.name}
           userName={userName}
           name={m.name}
           mount={m.mount}

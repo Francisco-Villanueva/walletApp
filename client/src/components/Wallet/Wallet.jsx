@@ -16,7 +16,7 @@ export default function Wallet({ spents }) {
   }, []);
 
   const wallet = useSelector((s) => s.wallets);
-  console.log("Wallets,", wallet);
+  // console.log("Wallets,", wallet);
 
   const handleCheckboxChange = (e, id) => {
     if (e.target.checked) {
@@ -40,7 +40,7 @@ export default function Wallet({ spents }) {
   const totalCuenta = (walletMoney) => {
     let totalSpents =
       spents.length > 0 ? spents.reduce((cc, t) => cc + t.amount, 0) : 0;
-    console.log("totalSpents", totalSpents);
+    // console.log("totalSpents", totalSpents);
     return walletMoney - totalSpents;
   };
   return (

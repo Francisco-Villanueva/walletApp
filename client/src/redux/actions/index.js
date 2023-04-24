@@ -7,6 +7,7 @@ export const actionTypes = {
   DELETE_SPENTS: "DELETE_SPENTS",
   SET_USER_ACTUAL: "SET_USER_ACTUAL",
   GET_WALLETS: "GET_WALLETS",
+  GET_USER_DATA: "GET_USER_DATA",
 };
 export const getUser = () => {
   return async function (dispatch) {
@@ -16,6 +17,23 @@ export const getUser = () => {
       type: actionTypes.GET_USERS,
       payload: res.data,
     });
+  };
+};
+
+export const getUserById = (id) => {
+  return async function (dispatch) {
+    try {
+      const res = await axios.get(`http://localhost:4000/users/${id}`);
+      console.log("entroe el getUserById() ", res);
+
+      return dispatch({
+        type: actionTypes.GET_USER_DATA,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log("entroe el getUserById() ", error);
+      throw new Error(error);
+    }
   };
 };
 

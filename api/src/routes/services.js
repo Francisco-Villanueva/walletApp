@@ -1,5 +1,6 @@
 const { Wallet, User } = require("../db");
 const axios = require("axios");
+const { ANIMALES, OBJETOS, COMIDAS } = require("../aliasServices");
 
 const test = (req, res) => {
   res.send("hola");
@@ -14,6 +15,92 @@ const getUsers = async (req, res) => {
     res.status(400).send(error);
   }
 };
+
+function generarCBU() {
+  let entidad = Math.floor(Math.random() * 1000); // Número aleatorio de 3 dígitos para la entidad bancaria
+  let sucursal = Math.floor(Math.random() * 100); // Número aleatorio de 2 dígitos para la sucursal bancaria
+  let digitoVerificador = Math.floor(Math.random() * 10); // Número aleatorio de 1 dígito para el dígito verificador
+  let cuenta = ""; // Variable para ir concatenando los números de la cuenta bancaria
+  for (let i = 0; i < 13; i++) {
+    cuenta += Math.floor(Math.random() * 10); // Genera un número aleatorio de un solo dígito y lo agrega a la cuenta
+  }
+  return (
+    entidad.toString().padStart(3, "0") +
+    sucursal.toString().padStart(2, "0") +
+    digitoVerificador +
+    cuenta
+  );
+}
+function generarALIAS() {
+  const animales = [
+    "Perro",
+    "Gato",
+    "Elefante",
+    "Tigre",
+    "León",
+    "Cebra",
+    "Jirafa",
+    "Rinoceronte",
+    "Canguro",
+    "Panda",
+    "Koala",
+    "Ballena",
+    "Delfín",
+    "Orca",
+    "Pingüino",
+  ];
+  const objetos = [
+    "Teléfono",
+    "Computadora",
+    "Mesa",
+    "Silla",
+    "Refrigerador",
+    "Horno",
+    "Televisor",
+    "Lámpara",
+    "Libro",
+    "Planta",
+    "Reloj",
+    "Cámara",
+    "Ventilador",
+    "Coche",
+    "Bicicleta",
+  ];
+  const comidas = [
+    "Pizza",
+    "Hamburguesa",
+    "Tacos",
+    "Sushi",
+    "Ensalada",
+    "Pollo frito",
+    "Lasagna",
+    "Espagueti",
+    "Ceviche",
+    "Empanadas",
+    "Churrasco",
+    "Costillas",
+    "Ramen",
+    "Carne",
+    "Curry",
+  ];
+
+  // Genera un número aleatorio entre 0 y 14
+  const randAnimal = Math.floor(Math.random() * animales.length);
+  const randObjeto = Math.floor(Math.random() * objetos.length);
+  const randComida = Math.floor(Math.random() * comidas.length);
+
+  // Retorna una cadena concatenada de las palabras aleatorias
+
+  const alias =
+    animales[randAnimal] +
+    "." +
+    objetos[randObjeto] +
+    "." +
+    comidas[randComida];
+
+  return alias.toUpperCase();
+}
+
 const createUser = async (req, res) => {
   try {
     const { name, email, pw } = req.body;
@@ -26,6 +113,8 @@ const createUser = async (req, res) => {
       name: name,
       email: email,
       pw: pw,
+      cvu: generarCBU(),
+      alias: generarALIAS(),
     });
 
     res.status(200).send(newUser);
@@ -44,7 +133,7 @@ const getUsersById = async (req, res) => {
       return res.status(400).send("User not found!");
     }
 
-    res.status(200).send(user);
+    res.status(200).json(user);
   } catch (error) {
     console.log("ERROR:  ", error);
     res.status(400).send(error);

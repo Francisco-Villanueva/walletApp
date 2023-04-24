@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./Login.css";
 import walletimg from "../../img/wallet.png";
 import { useNavigate } from "react-router-dom";
-import { USERS } from "./data";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, setUserActual } from "../../redux/actions";
+import { getUser, getUserById, setUserActual } from "../../redux/actions";
 export default function Login() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -20,15 +19,17 @@ export default function Login() {
   });
   const [validPw, setValidPw] = useState(false);
   const navigate = useNavigate();
+
   const checkUser = (usuarios, userToCheck) => {
     const aux = usuarios.filter(
       (e) => e.name === userToCheck.userName || e.email === userToCheck.userName
     );
-    // console.log("aux", aux[0]);
+    console.log("aux", aux[0]);
     if (aux.length != 0) {
       if (aux[0].pw === userToCheck.userPw) {
         setExit(exit === true ? false : true);
-        dispatch(setUserActual(user.userName));
+        dispatch(setUserActual(aux[0]));
+        dispatch(getUserById(aux[0].id));
         setTimeout(() => navigate(`/home`), 1000);
       } else {
         setValidPw(true);

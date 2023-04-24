@@ -87,7 +87,6 @@ export default function Allspents({ spents }) {
     setSelectedCards([]);
   };
 
-  console.log("selectedCards", selectedCards);
   return (
     <div className="allSpents-contianer">
       <section className="allSpentents__arrow-container">

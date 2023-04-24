@@ -2,10 +2,11 @@ import { actionTypes } from "../actions";
 
 const intialState = {
   users: [],
-  actualUser: "",
+  actualUser: [],
   spents: [],
   spentsByTypes: [],
   wallets: [],
+  userData: [],
 };
 
 const rootReducer = (state = intialState, action) => {
@@ -50,6 +51,14 @@ const rootReducer = (state = intialState, action) => {
         wallets: action.payload,
       };
     }
+
+    case actionTypes.GET_USER_DATA: {
+      return {
+        ...state,
+        userData: action.payload,
+      };
+    }
+
     default:
       return state;
   }
