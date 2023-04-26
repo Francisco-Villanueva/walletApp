@@ -10,7 +10,8 @@ import {
 import { useNavigate } from "react-router-dom";
 
 import User from "../User/User";
-export default function NavBar({ userName }) {
+export default function NavBar({ userName, userId }) {
+  console.log("ID QUE LLEGA AL NAVBAR", userId);
   const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = () => {
@@ -20,9 +21,13 @@ export default function NavBar({ userName }) {
     setShowModal(false);
   };
   const navigation = useNavigate();
+
   return (
     <div className="navbar-main">
-      <div className="navbar-logo" onClick={() => navigation("/home")}>
+      <div
+        className="navbar-logo"
+        onClick={() => navigation(`/home/${userId}}`)}
+      >
         <FontAwesomeIcon icon={faWallet} />
         <span
           style={{
@@ -39,7 +44,7 @@ export default function NavBar({ userName }) {
       <div className="navbar-links">
         <p
           onClick={() => {
-            navigation("/wallet");
+            navigation(`/wallet/${userId}}`);
           }}
           className="navbar-links__p"
         >

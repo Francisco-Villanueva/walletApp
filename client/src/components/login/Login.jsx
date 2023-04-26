@@ -29,8 +29,7 @@ export default function Login() {
       if (aux[0].pw === userToCheck.userPw) {
         setExit(exit === true ? false : true);
         dispatch(setUserActual(aux[0]));
-        dispatch(getUserById(aux[0].id));
-        setTimeout(() => navigate(`/home`), 1000);
+        setTimeout(() => navigate(`/home/${aux[0].id}`), 1000);
       } else {
         setValidPw(true);
         // alert(`Pw INCO ${aux.userPw}  !=  ${userToCheck.userPW}`);

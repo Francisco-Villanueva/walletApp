@@ -12,13 +12,19 @@ import { getUserById } from "../../redux/actions";
 Chart.register(ArcElement);
 
 export default function Home({ typesSpents, wallets }) {
+  const params = useParams();
   const dispatch = useDispatch();
+  const { id } = params;
+  console.log("id", id);
+  useEffect(() => {
+    dispatch(getUserById(id));
+  }, []);
   const allSpents = useSelector((s) => s.spents);
   const userLoged = useSelector((s) => s.userData);
 
   // const userLoged = dispatch(getUserById(userActual.id));
 
-  console.log("userLoged", userLoged);
+  console.log("USER LOGED", userLoged);
   const [showModal, setShowModal] = useState(false);
 
   // console.log("wallets", wallets);
@@ -52,7 +58,7 @@ export default function Home({ typesSpents, wallets }) {
   return (
     <div className="home-main">
       <div className="navBar-container">
-        <NavBar userName={"pepe"} />
+        <NavBar userName={"pepe"} userId={id} />
       </div>
       <div className="home-body">
         <div className="mounth-total-container">
