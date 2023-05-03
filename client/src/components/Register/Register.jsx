@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import walletimg from "../../img/wallet.png";
 import "./Register.css";
 import { useNavigate } from "react-router-dom";
-import { createUser } from "../../redux/actions";
+import { createUser, getUser } from "../../redux/actions";
 import { getPasswordStrength } from "./Helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,10 +12,13 @@ import {
   faCircleCheck,
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
-export default function Register() {
+export default function Register({ users }) {
   const dispatch = useDispatch();
   const [exit, setExit] = useState(false);
-
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+  console.log("users", users);
   const [data, setData] = useState({
     userName: "",
     userEmail: "",
@@ -28,6 +31,7 @@ export default function Register() {
     number: false,
   });
 
+  const [userExist, setUserExist] = useState(false); // [false, true
   const navigate = useNavigate();
 
   const handleRegisterClick = () => {
@@ -97,6 +101,14 @@ export default function Register() {
         setPwCoinciden(false);
       }
     }
+
+    if (e.target.name === "userName") {
+      if (users.find((user) => user.name === e.target.value)) {
+        setUserExist(false);
+      } else {
+        setUserExist(true);
+      }
+    }
   };
 
   const handleDisable =
@@ -125,6 +137,19 @@ export default function Register() {
             <label for="username" className="label-register">
               User Name
             </label>
+
+            {data.userName !== "" ? (
+              userExist ? (
+                <FontAwesomeIcon
+                  className="userName-error icon-checked"
+                  icon={faCheckCircle}
+                />
+              ) : (
+                <span className="userName-error">User must be unique</span>
+              )
+            ) : (
+              ""
+            )}
           </div>
           <div className="inputContainer ">
             <input

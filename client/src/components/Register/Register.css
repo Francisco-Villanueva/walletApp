@@ -119,3 +119,14 @@
   padding: 0.2em 1rem;
   margin-top: 3.5rem;
 }
+.userName-error {
+  color: red;
+  font-size: 0.8rem;
+  font-weight: 800;
+  position: absolute;
+  top: 15px;
+  right: -30px;
+}
+.icon-checked {
+  color: green;
+}

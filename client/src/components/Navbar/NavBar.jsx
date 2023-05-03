@@ -24,10 +24,7 @@ export default function NavBar({ userName, userId }) {
 
   return (
     <div className="navbar-main">
-      <div
-        className="navbar-logo"
-        onClick={() => navigation(`/home/${userId}}`)}
-      >
+      <div className="navbar-logo" onClick={() => navigation(`/home`)}>
         <FontAwesomeIcon icon={faWallet} />
         <span
           style={{
@@ -44,7 +41,7 @@ export default function NavBar({ userName, userId }) {
       <div className="navbar-links">
         <p
           onClick={() => {
-            navigation(`/wallet/${userId}}`);
+            navigation(`/wallet`);
           }}
           className="navbar-links__p"
         >

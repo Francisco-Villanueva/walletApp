@@ -13,6 +13,7 @@ function App() {
   const allSpents = useSelector((state) => state.spents);
   const spentsByType = useSelector((state) => state.spentsByTypes);
   const allWallets = useSelector((state) => state.wallets);
+  const allUsers = useSelector((state) => state.users);
   const spentsByType_filter = spentsByType.filter((s) => s.mount > 0);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -25,12 +26,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
-          path="/home/:id"
+          path="/home"
           element={
             <Home typesSpents={spentsByType_filter} wallets={allWallets} />
           }
         />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register users={allUsers} />} />
         <Route
           path="/allSpents/:type"
           element={<Allspents spents={allSpents} />}
